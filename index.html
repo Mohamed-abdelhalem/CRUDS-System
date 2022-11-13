@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <!-- for fontawesome -->
+        <script src="https://kit.fontawesome.com/6a274a2379.js" crossorigin="anonymous"></script>
+        <title>  CRUDS </title>
+    </head>
+    <body>
+        <div class="crud container ">
+            <!-- start head  -->
+            <div class="head d-flex justify-content-center flex-column align-items-center">
+                <p class="h2"> CRUDS </p>
+                <p> PRODUCT MANAGEMENT SYSTEM </p>
+            </div>
+            <!-- end head  -->
+            <!-- start inputs  -->
+            <div class="inputs">
+                <input type="text" id="title" placeholder="title">
+                <div class="price d-flex align-items-center justify-content-between">
+                    <input onkeyup="getTotal()" type="number" id="price" placeholder="price">
+                    <input onkeyup="getTotal()" type="number" id="taxes" placeholder="taxes">
+                    <input onkeyup="getTotal()" type="number" id="ads" placeholder="ads">
+                    <input onkeyup="getTotal()" type="number" id="discount" placeholder="discount">
+                    <span  onkeyup="getTotal()" id="total"> </span>
+                </div>
+                <input type=" number " id="count" placeholder=" count " >
+                <input type=" text " id="category" placeholder=" category " >
+                <button id="submit" class="mt-3" >create</button>
+            </div>
+            <!-- end inputs  -->
+            <!-- start outputs  -->
+            <div class="outputs my-4">
+                <div class="searchBlock">
+                    <input onkeyup="searchData(this.value)" type="text" id="search" placeholder=" Search " class="mb-4">
+                    <div class="btnSearch d-flex align-items-center justify-content-between">
+                        <button onclick = "getSearchMood(this.id)" id="searchTitle" class="my-2"> Search By Title </button>
+                        <button onclick = "getSearchMood(this.id)" id="searchCategory" class="my-2"> Search By Category </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end outputs  -->
+            <div id="deleteAll">
+
+            </div>
+            <!-- start table  -->
+            <div class="container">
+                <table class="w-100 text-center my-5 ourTable" >
+                <tr>
+                    <th> ID </th>
+                    <th> TITLE </th>
+                    <th> PRICE </th>
+                    <th> TAXES </th>
+                    <th> ADS </th>
+                    <th> DISCOUNT </th>
+                    <th>TOTAL</th>
+                    <th> CATEGORY </th>
+                    <th> UPDATE </th>
+                    <th> DELETE </th>
+                </tr>
+                <tbody id="tbody">
+                    <!-- added by js -->
+                </tbody>
+            </table>
+            </div>
+            
+            <!-- start table  -->
+ <div class= "popup" id="pop">
+    <button type="button" class="btn btn-primary togel">Primary</button>
+    <p> you must enter all data </p>
+ </div>
+
+        </div>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body> 
+</html>
