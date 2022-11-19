@@ -277,4 +277,10 @@ function searchData(value)
 $('.togel').click(function()
     {
     $('.popup').fadeOut();
-    });
+});
+    
+
+if (document.body.style.width < 900)
+{
+    alert("no");
+}
