@@ -58,6 +58,12 @@ input:focus
     cursor: pointer;
     transform: scale(1.02);
 }
+.light-theme input:focus
+{
+    background-color: var(--temp3);
+    cursor: pointer;
+    transform: scale(1.02);
+}
 .inputs .price input
 {
     width: 21%;
