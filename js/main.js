@@ -20,6 +20,7 @@ function getTotal()
     {
         let result = (+price.value + +taxes.value + +ads.value) - (+discount.value);
         total.innerHTML = result;
+        total.style.color = "#fff";
         total.style.backgroundColor = 'green';
     }
     else
@@ -58,7 +59,7 @@ submit.onclick = function ()
             if (title.value != '' && price.value != '' && count.value != '' &&
                 category.value != '' && taxes.value != '' && ads.value != '' && discount.value != '')
             {
-                if (isNaN(title.value) && isNaN(category.value) && !isNaN(count.value) && !isNaN(total.innerHTML))
+                if (isNaN(title.value) && isNaN(category.value) && !isNaN(count.value) && !isNaN(total.innerHTML) && total.innerHTML > 0   )
                 {
                     if (newProduct.count > 1) {
                         for (let i = 1; i <= newProduct.count; i++) {
@@ -84,7 +85,7 @@ submit.onclick = function ()
             else
             {
             swal({
-                title: "Fields Empty!!",
+                title: "Fields Empty !!",
                 text: "Please Check The Missing Values ",
                 icon: "error",
                 button: "Ok",
@@ -93,11 +94,43 @@ submit.onclick = function ()
     }
     else
     {
-            dataProduct[tmp] = newProduct;
-            mood = 'create';
-            count.style.display = "block";
-            submit.innerHTML = 'create';
-            clearData();
+        if (title.value != '' && price.value != '' && category.value != '' &&
+            taxes.value != '' && ads.value != '' && discount.value != '')
+        {
+            if (isNaN(title.value) && isNaN(category.value) && !isNaN(total.innerHTML) && total.innerHTML > 0)
+            {
+                dataProduct[tmp] = newProduct;
+                mood = 'create';
+                count.style.display = "block";
+                submit.innerHTML = 'create';
+                submit.style.backgroundColor = "green";
+                swal({
+                    title: "Successfully",
+                    text: "Your Product has been Updated",
+                    icon: "success",
+                    button: "Ok",
+                });
+                clearData();
+            }
+            else
+                {
+                swal({
+                    title: "Wrong Inputs !!",
+                    text: "Please Check The invalid Values ",
+                    icon: "error",
+                    button: "Ok",
+                });
+                }
+        }
+        else
+            {
+            swal({
+                title: "Fields Empty !!",
+                text: "Please Check The Missing Values ",
+                icon: "error",
+                button: "Ok",
+            });
+            }
     }
     localStorage.setItem('product', JSON.stringify(dataProduct));
     //console.log(dataProduct);
@@ -128,16 +161,16 @@ function showData()
     {
         table +=`
                 <tr>
-                        <td>${i+1} </td>
-                        <td>${dataProduct[i].title} </td>
-                        <td>${dataProduct[i].price} </td>
-                        <td>${dataProduct[i].taxes}  </td>
-                        <td>${dataProduct[i].ads}  </td>
-                        <td>${dataProduct[i].discount}  </td>
-                        <td>${dataProduct[i].total} </td>
-                        <td>${dataProduct[i].category} </td>
-                        <td> <button onclick = "updateData(${i})" id="update"> Update</button> </td>
-                        <td> <button onclick = "deleteData(${i})" id="delete"> Delete </button> </td>
+                        <td data-label="ID" >${i+1} </td>
+                        <td data-label="Title" >${dataProduct[i].title} </td>
+                        <td data-label="Price" >${dataProduct[i].price} </td>
+                        <td data-label="Taxes" >${dataProduct[i].taxes}  </td>
+                        <td data-label="Ads" >${dataProduct[i].ads}  </td>
+                        <td data-label="Discount" >${dataProduct[i].discount}  </td>
+                        <td data-label="Total" >${dataProduct[i].total} </td>
+                        <td data-label="Category" >${dataProduct[i].category} </td>
+                        <td data-label="Update" > <button onclick = "updateData(${i})" id="update"> Update</button> </td>
+                        <td data-label="Delete" > <button onclick = "deleteData(${i})" id="delete"> Delete </button> </td>
                 </tr>
                 `
     }
@@ -174,7 +207,7 @@ function deleteData(i)
             dataProduct.splice(i, 1);
             localStorage.product = JSON.stringify(dataProduct);
             showData();
-            swal("Your Product has been deleted !", {
+            swal("Your product has been deleted !", {
             icon: "success",
             });
             } else
@@ -223,8 +256,8 @@ function updateData(i)
     count.style.display = "none";
     category.value = dataProduct[i].category;
     submit.innerHTML = 'Update';
+    submit.style.backgroundColor = " gold ";
     mood = 'update';
-                
     tmp = i;
     scroll(
         {
