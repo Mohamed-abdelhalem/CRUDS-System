@@ -56,7 +56,7 @@ submit.onclick = function ()
     if (title.value    != '' && price.value != '' && count.value != '' &&
         category.value != '' && taxes.value != '' && ads.value   != '' && discount.value != '')
     {
-        if ( isNaN(title.value) && isNaN(category.value) && !isNaN(count.value) )
+        if (isNaN(title.value) && isNaN(category.value) && !isNaN(count.value) &&   !isNaN(total.innerHTML) )
         {
             if (mood === 'create')
            {
@@ -84,12 +84,22 @@ submit.onclick = function ()
         }
         else
         {
-            alert("must enter valid title");   
+            swal({
+                title: "Wrong Inputs !!",
+                text: "Please Check The invalid Values ",
+                icon: "warning",
+                button: "Ok",
+            });  
         }
     }
     else
     {
-        pop.style.display = "block";
+        swal({
+                title: "Fields Empty!!",
+                text: "Please Check The Missing Values ",
+                icon: "warning",
+                button: "Ok",
+            });
     }
     
     localStorage.setItem('product', JSON.stringify(dataProduct));
