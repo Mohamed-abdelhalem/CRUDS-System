@@ -151,13 +151,3 @@ table tr td #update:hover,
     outline: none;
     box-shadow: none;
 }
-
-
-
-@media(max-width: 900px)
-{
-    body
-    {
-        transform: rotate(270deg);
-    }
-}
