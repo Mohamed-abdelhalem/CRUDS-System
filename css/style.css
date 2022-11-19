@@ -1,16 +1,35 @@
-/* global */
+/* start global */
 *{ margin: 0; padding: 0; }
-body
+:root
+{
+    --primary-color : #222;
+    
+}
+.dark
 { 
-    background-color: #222;
+    background-color: var(--primary-color);
     font-family: system-ui;
     color: white;
     position: relative;
 }
+.light-theme
+{
+    --secondary-color : #fff;
+    --temp: #B3CEE5;
+    --temp2 : #54627B;
+    --temp3: #0C6980;
+}
+/* end global */
+
 /* start head */
 .head
 {
     margin: 15px 0;
+}
+#theme
+{
+    width: 30px;
+    cursor: pointer;
 }
 /* end head  */
 /* start inputs */
@@ -79,7 +98,7 @@ table tr td #delete
 /* start table */
 table
 {
-    background-color: #111;
+    background-color: var(--temp);
     border-collapse:separate;
     padding: 15px;
     border-radius: 20px;
@@ -91,18 +110,19 @@ table th,table td
 {
     border-radius: 5px;
     padding: 5px;
+    color: white;
     
 }
 table th
 {
-    background-color: black;
+    background-color:var(--temp3);
     box-shadow: 0px 0px 5px 1px black;
     padding: 15px;
 }
 table td
 {
     
-    background-color: #222;
+    background-color: var(--temp2);
     box-shadow: 0px 0px 5px 1px black;
 }
 table td:nth-child(9),
@@ -136,15 +156,17 @@ table tr td #update:hover,
 
 
 /*  end table */
-
+/*
 .swal-button {
     background-color: goldenrod;
     transition: all 0.5s ease-in-out;
 }
+
 .swal-button:hover
 {
     background-color: rgba(218, 165, 32, 0.721) !important; 
 }
+*/
 .swal-button:focus
 {
     border: 0;

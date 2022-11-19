@@ -8,9 +8,9 @@ let total = document.getElementById('total');
 let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
-let pop = document.getElementById('pop');
 let mood = 'create';
 let tmp;
+let theme = document.getElementById('theme');
 //check getting elements
 ///////////console.log(title, price, taxes, ads, discount, total, count, category, submit);
 // get total
@@ -87,7 +87,7 @@ submit.onclick = function ()
             swal({
                 title: "Wrong Inputs !!",
                 text: "Please Check The invalid Values ",
-                icon: "warning",
+                icon: "error",
                 button: "Ok",
             });  
         }
@@ -97,7 +97,7 @@ submit.onclick = function ()
         swal({
                 title: "Fields Empty!!",
                 text: "Please Check The Missing Values ",
-                icon: "warning",
+                icon: "error",
                 button: "Ok",
             });
     }
@@ -163,15 +163,55 @@ showData();
 function deleteData(i)
 {
     //console.log(i);
-    dataProduct.splice(i, 1);
-    localStorage.product = JSON.stringify(dataProduct);
-    showData();
+    swal({
+            title: "Are you sure ?",
+            text: "Once deleted, you will not be able to recover this Product !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) =>
+        {
+            if (willDelete)
+            {
+            dataProduct.splice(i, 1);
+            localStorage.product = JSON.stringify(dataProduct);
+            showData();
+            swal("Your Product has been deleted !", {
+            icon: "success",
+            });
+            } else
+            {
+            swal("Your Product is safe !");
+            }
+        });
+    
 }
+// clean data
 function deleteAll()
 {
-    localStorage.clear();
-    dataProduct.splice(0);
-    showData();
+    swal({
+            title: "Are you sure ?",
+            text: "Once deleted, you will not be able to recover these Products !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) =>
+        {
+            if (willDelete)
+            {
+                localStorage.clear();
+                dataProduct.splice(0);
+                showData();
+                swal("Your Products have been deleted !", {
+                icon: "success",
+            });
+            } else
+            {
+            swal("Your Products are safe !");
+            }
+        });
 }
 // update product
 function updateData(i)
@@ -272,9 +312,17 @@ function searchData(value)
     }
     document.getElementById('tbody').innerHTML = table;
 }
-// clean data
-// for togel popup
-$('.togel').click(function()
-    {
-    $('.popup').fadeOut();
-});
+// change theme mode
+theme.onclick = function ()
+{
+    if (document.body.classList.contains("dark")) {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light-theme");
+        theme.src = "imgs/moon.png";
+    }
+    else {
+        document.body.classList.remove("light-theme");
+        document.body.classList.add("dark");
+        theme.src = "imgs/sun.png";
+    }
+}
