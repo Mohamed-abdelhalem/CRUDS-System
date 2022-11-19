@@ -53,55 +53,52 @@ submit.onclick = function ()
         count: count.value,
         category: category.value.toUpperCase()
     }
-    if (title.value    != '' && price.value != '' && count.value != '' &&
-        category.value != '' && taxes.value != '' && ads.value   != '' && discount.value != '')
+    if (mood === 'create')
     {
-        if (isNaN(title.value) && isNaN(category.value) && !isNaN(count.value) &&   !isNaN(total.innerHTML) )
-        {
-            if (mood === 'create')
-           {
-            if (newProduct.count > 1)
+            if (title.value != '' && price.value != '' && count.value != '' &&
+                category.value != '' && taxes.value != '' && ads.value != '' && discount.value != '')
             {
-                for (let i = 1; i <= newProduct.count; i++)
+                if (isNaN(title.value) && isNaN(category.value) && !isNaN(count.value) && !isNaN(total.innerHTML))
                 {
+                    if (newProduct.count > 1) {
+                        for (let i = 1; i <= newProduct.count; i++) {
+                            dataProduct.push(newProduct);
+                        }
+                    }
+                    else {
                         dataProduct.push(newProduct);
+                    }
+
+                    clearData();
+                }
+                else
+                {
+                swal({
+                    title: "Wrong Inputs !!",
+                    text: "Please Check The invalid Values ",
+                    icon: "error",
+                    button: "Ok",
+                });
                 }
             }
             else
             {
-                    dataProduct.push(newProduct);
-            }
-
-                clearData();
-            }
-            else {
-                dataProduct[tmp] = newProduct;
-                mood = 'create';
-                count.style.display = "block";
-                submit.innerHTML = 'create';
-                clearData();
-            }
-        }
-        else
-        {
             swal({
-                title: "Wrong Inputs !!",
-                text: "Please Check The invalid Values ",
-                icon: "error",
-                button: "Ok",
-            });  
-        }
-    }
-    else
-    {
-        swal({
                 title: "Fields Empty!!",
                 text: "Please Check The Missing Values ",
                 icon: "error",
                 button: "Ok",
             });
+            }
     }
-    
+    else
+    {
+            dataProduct[tmp] = newProduct;
+            mood = 'create';
+            count.style.display = "block";
+            submit.innerHTML = 'create';
+            clearData();
+    }
     localStorage.setItem('product', JSON.stringify(dataProduct));
     //console.log(dataProduct);
     
@@ -227,6 +224,7 @@ function updateData(i)
     category.value = dataProduct[i].category;
     submit.innerHTML = 'Update';
     mood = 'update';
+                
     tmp = i;
     scroll(
         {
