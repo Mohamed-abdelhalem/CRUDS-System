@@ -124,7 +124,6 @@ table th,table td
     border-radius: 5px;
     padding: 5px;
     color: white;
-    
 }
 table th
 {
@@ -137,6 +136,10 @@ table td
     
     background-color: var(--temp2);
     box-shadow: 0px 0px 5px 1px black;
+}
+table td:nth-child(1)
+{
+    font-weight: 900;
 }
 table td:nth-child(9),
 table td:nth-child(10)
